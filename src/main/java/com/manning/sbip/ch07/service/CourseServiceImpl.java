@@ -1,5 +1,6 @@
 package com.manning.sbip.ch07.service;
 
+import com.manning.sbip.ch07.exception.CourseNotFoundException;
 import com.manning.sbip.ch07.model.Course;
 import com.manning.sbip.ch07.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,13 +36,17 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public void updateCourse(long courseId, Course course) {
-        courseRepository.findById(courseId).ifPresent(dbCourse -> {
-            dbCourse.setName(course.getName());
-            dbCourse.setCategory(course.getCategory());
-            dbCourse.setDescription(course.getDescription());
-            dbCourse.setRating(course.getRating());
-            courseRepository.save(dbCourse);
-        });
+        Course dbCourse = courseRepository.findById(courseId).
+                orElseThrow(() -> new CourseNotFoundException(
+                        String.format("No course with id %s is available", courseId)
+                ));
+
+        dbCourse.setName(course.getName());
+        dbCourse.setCategory(course.getCategory());
+        dbCourse.setDescription(course.getDescription());
+        dbCourse.setRating(course.getRating());
+        courseRepository.save(dbCourse);
+
     }
 
     @Override
@@ -51,6 +56,10 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public void deleteCourseById(long courseId) {
+        courseRepository.findById(courseId)
+                        .orElseThrow(() -> new CourseNotFoundException(
+                                String.format("No course with id %s is available", courseId)
+                        ));
         courseRepository.deleteById(courseId);
     }
 
