@@ -14,7 +14,7 @@ public interface CourseService {
 
     Iterable<Course> getCourses();
 
-    void updateCourse(long courseId, Course course);
+    Course updateCourse(long courseId, Course course);
 
     void deleteCourseById(long courseId);
 

@@ -40,7 +40,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public void updateCourse(long courseId, Course course) {
+    public Course updateCourse(long courseId, Course course) {
         Course dbCourse = courseRepository.findById(courseId).
                 orElseThrow(() -> new CourseNotFoundException(
                         String.format("No course with id %s is available", courseId)
@@ -50,7 +50,7 @@ public class CourseServiceImpl implements CourseService {
         dbCourse.setCategory(course.getCategory());
         dbCourse.setDescription(course.getDescription());
         dbCourse.setRating(course.getRating());
-        courseRepository.save(dbCourse);
+        return courseRepository.save(dbCourse);
 
     }
 
