@@ -21,6 +21,11 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public Optional<Course> getCourseById(long courseId) {
+
+        courseRepository.findById(courseId)
+                .orElseThrow(() -> new CourseNotFoundException(
+                        String.format("No course with id %s is available", courseId)
+                ));
         return courseRepository.findById(courseId);
     }
 
