@@ -137,7 +137,7 @@ class DTests {
                 .andExpect(jsonPath("$.name").value("Rapid Spring Boot Application Development"))
                 .andExpect(jsonPath("$.category").value("Spring"))
                 .andExpect(jsonPath("$.rating").value(5))
-                .andExpect(status().isOk());
+                .andExpect(status().isNoContent());
 
     }
 
