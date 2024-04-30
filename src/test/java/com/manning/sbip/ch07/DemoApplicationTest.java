@@ -54,7 +54,7 @@ class DTests {
                 .andExpect(jsonPath("$.name").value("Rapid Spring Boot Application Development"))
                 .andExpect(jsonPath("$.category").value("Spring"))
                 .andExpect(jsonPath("$.rating").value(5))
-                .andExpect(status().isOk()).andReturn().getResponse();
+                .andExpect(status().isCreated()).andReturn().getResponse();
 
 
 
@@ -78,7 +78,7 @@ class DTests {
                 .andExpect(jsonPath("$.name").value("Rapid Spring Boot Application Development"))
                 .andExpect(jsonPath("$.category").value("Spring"))
                 .andExpect(jsonPath("$.rating").value(5))
-                .andExpect(status().isOk()).andReturn().getResponse();
+                .andExpect(status().isCreated()).andReturn().getResponse();
         Integer id = JsonPath.parse(response.getContentAsString()).read("$.id");
 
         mockMvc.perform(get("/courses/{id}",id))
@@ -117,7 +117,7 @@ class DTests {
                 .andExpect(jsonPath("$.name").value("Rapid Spring Boot Application Development"))
                 .andExpect(jsonPath("$.category").value("Spring"))
                 .andExpect(jsonPath("$.rating").value(3))
-                .andExpect(status().isOk()).andReturn().getResponse();
+                .andExpect(status().isCreated()).andReturn().getResponse();
 
         Integer id = JsonPath.parse(response.getContentAsString()).read("$.id");
 
@@ -159,7 +159,7 @@ class DTests {
                 .andExpect(jsonPath("$.name").value("Rapid Spring Boot Application Development"))
                 .andExpect(jsonPath("$.category").value("Spring"))
                 .andExpect(jsonPath("$.rating").value(5))
-                .andExpect(status().isOk()).andReturn().getResponse();
+                .andExpect(status().isCreated()).andReturn().getResponse();
         Integer id = JsonPath.parse(response.getContentAsString()).read("$.id");
 
         mockMvc.perform(delete("/courses/{id}", id))
