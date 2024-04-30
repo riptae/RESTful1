@@ -164,7 +164,7 @@ class DTests {
 
         mockMvc.perform(delete("/courses/{id}", id))
                 .andDo(print())
-                .andExpect(status().isOk());
+                .andExpect(status().isNoContent());
 
     }
 
