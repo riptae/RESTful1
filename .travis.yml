@@ -32,10 +32,10 @@ deploy:
   - provider: codedeploy
     access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET_KEY
-    bucket: spring-deploy-test-build
+    bucket: rest-deployment-bucket
     bundle_type: zip
-    application: spring-deploy-test
-    deployment_group: spring-deploy-test-group
+    application: deployment
+    deployment_group: deployment
     region: ap-northeast-2
     wait-until-deployed: true
 
