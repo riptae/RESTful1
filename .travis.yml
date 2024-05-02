@@ -9,14 +9,18 @@ branches:
 cache:
   directories:
     - '$HOME/.m2/repository'
-    - '$HOME/.gradle'
+    - '$HOME/.gradle' #수정필요
 
 script: "./mvnw package"
 
 before_deploy:
-  - zip -r deployment *
-  - mkdir -p deploy
-  - mv deployment.zip deploy/deployment.zip
+  - mkdir -p before-deploy
+  - cp scripts/*.sh before-deploy/
+  - cp appspec.yml before-deploy/
+  - cp /target/*.jar before-deploy/
+  - cd before-deploy && zip -r before-deploy *
+  - cd ../ && mkdir -p deploy
+  - mv before-deploy/before-deploy.zip deploy/deployment.zip
 
 deploy:
   - provider: s3
